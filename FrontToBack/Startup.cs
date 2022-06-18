@@ -1,5 +1,7 @@
+using FrontToBack.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -12,6 +14,10 @@ namespace FrontToBack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<AppDbContext>(option =>
+            {
+                option.UseSqlServer(@"Server=THINKPAD;Database=FrontToBack;Trusted_Connection=True;MultipleActiveResultSets=true");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
